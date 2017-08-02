@@ -12,5 +12,5 @@ nmap:sudo apt-get install nmap
 
 python-nmap : sudo pip install python-nmap
 
-# !Please note that all i do is for fun and to learn,so dont yell me if i did s0mething wr0ng.
+# !Please note that all i do is for fun and to learn,so dont yell to me if i did s0mething wr0ng.
 Also This is under C0nstruction,i'll add some more features.
