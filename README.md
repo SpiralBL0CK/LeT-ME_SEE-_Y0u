@@ -9,6 +9,8 @@ Options:
 
 # Requirements:
 nmap:sudo apt-get install nmap
+
 python-nmap : sudo pip install python-nmap
 
-# !Please note that all i do is for fun and to learn,so dont hAte me if i did s0mething wr0ng.Also This is under C0nstruction,i'll add some more features.
+# !Please note that all i do is for fun and to learn,so dont hAte me if i did s0mething wr0ng.
+Also This is under C0nstruction,i'll add some more features.
