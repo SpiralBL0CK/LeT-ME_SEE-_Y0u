@@ -20,6 +20,8 @@ Options:
 # Requirements:
 nmap:sudo apt-get install nmap
 
+geocoder: sudo apt-get install geocoder
+
 python-nmap : sudo pip install python-nmap
 
 # !Please note that all i do is for fun and to learn,so dont yell to me if i did s0mething wr0ng.
