@@ -12,7 +12,7 @@ Options:
   
   --msg=MESSAGE, --message= MESSAGE payload to be send to the server   
   
-  --ip=IP                   ip dns lookup
+  --ip=IP                   ip for dns lookup
   
   --c, --chat               answer if you want to chat
 
