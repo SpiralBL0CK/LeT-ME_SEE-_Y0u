@@ -4,10 +4,15 @@ basic skelet for the construction of a python port scanner
 # Usage: LeT-ME_SEE-_Y0u.py [options]
 Options:
   -h, --help                show this help message and exit
+  
   -p PORT, --port=PORT      port to be suplied
+  
   --h0=HOST, --host=HOST    the ip for given DNS             
-  --msg=MESSAGE, --message= MESSAGE payload to be send to the server                
+  
+  --msg=MESSAGE, --message= MESSAGE payload to be send to the server   
+  
   --ip=IP                   ip dns lookup
+  
   --c, --chat               answer if you want to chat
 
 
