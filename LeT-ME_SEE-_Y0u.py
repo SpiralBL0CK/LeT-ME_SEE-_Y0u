@@ -21,6 +21,12 @@ ip = options.ip
 chat = options.connection
 
 def connect(tghost,tgport,payload_msg):
+	"""In case you want to connect after you scanned the
+		
+	target,and send some message dunno payload,get request
+	
+	or something like that there u go(ps still have to implement some stuff)
+	"""
 	fd = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 	try:
 		fd.connect((tghost,tgport))
