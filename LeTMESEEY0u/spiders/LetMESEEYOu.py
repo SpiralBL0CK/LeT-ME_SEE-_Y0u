@@ -19,7 +19,7 @@ class MySpider(scrapy.Spider):
         yield scrapy.Request(self.host.append(self.param))
         
 def scan(host,argz):
-    """This will be the callback of implementation of scapy functionalities
+    """This will be the callback implementation of scapy functionalities
         
         Also this function wont do more than scapping your data from
         
