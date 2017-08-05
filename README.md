@@ -20,7 +20,7 @@ Options:
   
 # To run the basic crawler(no functionality yet,but it works to be run with no errors):
 
-scrapy crawl LetMESEEYOu -a host="http://www.google.ro"
+scrapy crawl LetMESEEYOu -a host=
 
 Before executing the script you have to go to the root directory of the project and than execute the command above.
 
