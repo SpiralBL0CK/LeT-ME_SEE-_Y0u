@@ -16,6 +16,7 @@ Options:
   
   --c, --chat               answer if you want to chat
 
+  --s, --scrap              scrap a website to extract data from a specific webiste(* hardly trying to learn how to use it,so will take some time to be implemented)
 
 # Requirements:
 nmap:sudo apt-get install nmap
@@ -23,6 +24,9 @@ nmap:sudo apt-get install nmap
 geocoder: sudo apt-get install geocoder
 
 python-nmap : sudo pip install python-nmap
+
+scrapy: pip install Scrapy / conda install -c conda-forge scrapy
+
 
 # !Please note that all i do is for fun and to learn,so dont yell to me if i did s0mething wr0ng.
 Also This is under C0nstruction,i'll add some more features.
