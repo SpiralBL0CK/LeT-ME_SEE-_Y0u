@@ -32,6 +32,8 @@ def scan(host,argz):
 ALSO NOTE I STILL TRY TO FIGURE OUT HOW TO ARENGE THE SCRIPT SO YEAH, IN THE FUTURE MAYBE THERE WILL BE SOME GUI AND THE SCRIPT WILL BE FULLY DONE.Until than stay tuned for more 
 if u want.Thake it easy guyz.
 """
+
+#Trying to add this night a kind of oasswird brute-force when connecting to a ftp
         
 nm = nmap.PortScanner()
 parser = optparse.OptionParser()
