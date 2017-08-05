@@ -16,7 +16,7 @@ Options:
   
   --c, --chat               answer if you want to chat
 
-  --s, --scrap              scrap a website to extract data from a specific webiste(* hardly trying to learn how to use it,so will take some time to be implemented)
+  --s, --scrap              scrap a website to extract data from a specific webiste(* hardly trying to learn how to use it,so will take some time to be implemented)(also under construction as usual)
 
 # Requirements:
 nmap:sudo apt-get install nmap
