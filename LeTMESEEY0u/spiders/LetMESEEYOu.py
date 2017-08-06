@@ -6,9 +6,7 @@ import scrapy
 import pydoc
 import geocoder
 import ftplib
-import smtplib
-import smpt
-
+#import smtplib dunno mayber some smtp brute-force in the future will be added
 
 class MySpider(scrapy.Spider):
     """Crawler Class
@@ -61,6 +59,7 @@ brute_force = options.brute_force
 
 def brute(host):
 #mainly done has to be bounded with the option	
+#has to be incorporated intro a try/accept
     ftp = ftplib.FTP(host)
     with open("list.txt","r") as f:
         data = [x.strip().split(' ') for x in f.readlines()]
