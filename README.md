@@ -20,7 +20,7 @@ Options:
   
   --b, --brute-force        decide if you want to bruteforce some ftp
   
-# To run the basic crawler(no functionality yet,but it works to be run with no errors):
+# To run the basic crawler(no functionality yet,but it works can run with no errors):
 
 scrapy crawl LetMESEEYOu -a host=""
 
