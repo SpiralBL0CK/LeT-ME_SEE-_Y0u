@@ -20,7 +20,7 @@ class MySpider(scrapy.Spider):
         start_url = [self.host]
         
     def request(self,host,param):
-	#saw the mistake,just need to implement it its simple 
+	#saw the mistake,just need to implement the solution it its simple 
         yield scrapy.Request(self.host.append(self.param))
         
 def scan(host,argz):
