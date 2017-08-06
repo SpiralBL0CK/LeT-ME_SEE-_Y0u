@@ -18,6 +18,8 @@ Options:
 
   --s, --scrap              scrap a website to extract data from a specific webiste(* hardly trying to learn how to use it,so will take some time to be implemented)(also under construction as usual)
   
+  --b, --brute-force        decide if you want to bruteforce some ftp
+  
 # To run the basic crawler(no functionality yet,but it works to be run with no errors):
 
 scrapy crawl LetMESEEYOu -a host=""
