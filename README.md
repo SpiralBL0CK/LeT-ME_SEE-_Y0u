@@ -26,6 +26,9 @@ scrapy crawl LetMESEEYOu -a host=""
 
 Before executing the script you have to go to the root directory of the project and than execute the command above.
 
+yOu should check out the docs if you want and it will be easyer for you see understand what i mean.
+https://doc.scrapy.org/en/latest/topics/commands.html
+
 # Requirements:
 nmap:sudo apt-get install nmap
 
