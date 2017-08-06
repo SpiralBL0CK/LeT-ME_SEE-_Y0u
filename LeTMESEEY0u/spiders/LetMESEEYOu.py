@@ -5,9 +5,15 @@ import nmap
 import scrapy
 import pydoc
 import geocoder
+import ftplib
+import smtplib
+import smpt
 
 
 class MySpider(scrapy.Spider):
+    """Crawler Class
+    """
+    
     name = "LetMESEEYOu"
     def __init__(self,host='', *args,**kwargs):
         super(MySpider,self).__init__(*args,**kwargs)
@@ -19,7 +25,7 @@ class MySpider(scrapy.Spider):
         yield scrapy.Request(self.host.append(self.param))
         
 def scan(host,argz):
-    """This will be the callback implementation of scapy functionalities
+    """This will be the callback of implementation of scapy functionalities
         
         Also this function wont do more than scapping your data from
         
@@ -33,8 +39,6 @@ ALSO NOTE I STILL TRY TO FIGURE OUT HOW TO ARENGE THE SCRIPT SO YEAH, IN THE FUT
 if u want.Thake it easy guyz.
 """
 
-#Trying to add this night a kind of oasswird brute-force when connecting to a ftp
-        
 nm = nmap.PortScanner()
 parser = optparse.OptionParser()
 parser.add_option("-p","--port",action="store",type="int",dest="port",help="port to be suplied")
@@ -44,8 +48,8 @@ parser.add_option("--msg","--message",type="string",action="store",dest="message
 parser.add_option("--ip",type="string",action="store",dest="ip",help=" ip dns lookup")
 parser.add_option("--argz",type="string",action="store",dest="argz",help="criteria of how you want to scrap the data from the given website")
 parser.add_option("--c","--chat",action="store_true",dest="connection",help="if you want to chat")
-parser.add_option("--s","--scrap",type="callback",callack=scan(host,argz))
-
+#parser.add_option("--s","--scrap",type="callback",callack=scan(host,argz))
+parser.app_option("--b","--brute-force",action="store_true",dest="brute_force")
 (options,args) = parser.parse_args()
 host = options.host
 port = options.port
@@ -53,6 +57,16 @@ message = options.message
 ip = options.ip
 chat = options.connection
 argz = options.argz
+brute_force = options.brute_force
+
+def brute(host):
+#mainly done has to be bounded with the option	
+    ftp = ftplib.FTP(host)
+    with open("list.txt","r") as f:
+        data = [x.strip().split(' ') for x in f.readlines()]
+        
+    for username,password in data:
+        ftp.login(username,password)
 
 def connect(tghost,tgport,payload_msg):
 	fd = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -92,4 +106,3 @@ def find_open_port(host):
 #pydoc.doc(find_open_port)
 #find_open_port(host)
 #connect(host,port,message)
-
