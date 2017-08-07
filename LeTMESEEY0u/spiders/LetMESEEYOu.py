@@ -20,11 +20,8 @@ class MySpider(Spider):
         self.start_urls = [host]
         
     def parse(self, response):
-        for title in response.css('h2.entry-title'):
-            yield {'title': title.css('a ::text').extract_first()}
+        self.logger.info('A response from %s just arrived!', response.url)
 
-        for next_page in response.css('div.prev-post > a'):
-            yield response.follow(next_page, self.parse)
 '''
 def scan(host,argz):
     """This will be the callback of implementation of scapy functionalities
@@ -51,7 +48,7 @@ parser.add_option("--ip",type="string",action="store",dest="ip",help=" ip dns lo
 parser.add_option("--argz",type="string",action="store",dest="argz",help="criteria of how you want to scrap the data from the given website")
 parser.add_option("--c","--chat",action="store_true",dest="connection",help="if you want to chat")
 #parser.add_option("--s","--scrap",type="callback",callack=scan(host,argz))
-
+parser.add_option("--b","--bruteforce",action="strore_true",dest=brute,help='decide if you want to bruteforce some ftp')
 (options,args) = parser.parse_args()
 host = options.host
 port = options.port
@@ -59,8 +56,18 @@ message = options.message
 ip = options.ip
 chat = options.connection
 argz = options.argz
+brute= options.brute
 
-
+def brute(host):
+    try:
+        ftp = FTP(host)
+        with open('myfile.txt') as f:
+            credentials = [x.strip().split(':') for x in f.readlines()]
+        for username,password in credentials:
+            print username, password
+            ftp.login(username,password)
+    except ftplib.error_reply:
+        print "error"
 
 
 def connect(tghost,tgport,payload_msg):
@@ -111,3 +118,5 @@ def find_open_port(host):
 #find_open_port(host)
 #connect(host,port,message)
 '''
+
+#note for users most of the code must be comentated before running the crawler.only the spider class must be uncomented
