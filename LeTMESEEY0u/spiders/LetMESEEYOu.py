@@ -7,20 +7,28 @@ import pydoc
 import geocoder
 import ftplib
 from scrapy.spiders import Spider
+from scrapy.spiders import CrawlSpider, Rule
 #import smtplib dunno mayber some smtp brute-force in the future will be added
 
-class MySpider(Spider):
+class MySpider(CrawlSpider):
     """Crawler Class
     """
     
     name = "LetMESEEYOu"
-    def __init__(self,host='', *args,**kwargs):
+    def __init__(self,host='',restrict='',allowd="",*args,**kwargs):
         super(MySpider,self).__init__(*args,**kwargs)
-       # self.host = host
+        self.host = host
+        self.restrict = restrict
+        self.allow = allowd
+        self.allowed_host = host.split("www.")[1]
         self.start_urls = [host]
+        
+        rules = (Rule(LinkExtractor(allow=(allowd),deny=(restrict))))
         
     def parse(self, response):
         self.logger.info('A response from %s just arrived!', response.url)
+        print 'cookie from login', response.headers.getlist('Set-Cookie')[0].split(";")[0].split("=")[1]
+
 
 '''
 def scan(host,argz):
@@ -61,9 +69,9 @@ brute= options.brute
 def brute(host):
     try:
         ftp = FTP(host)
-        with open('list.txt') as f:
-            data = [x.strip().split(' ') for x in f.readlines()]
-        for username,password in data:
+        with open('myfile.txt') as f:
+            credentials = [x.strip().split(':') for x in f.readlines()]
+        for username,password in credentials:
             print username, password
             ftp.login(username,password)
     except ftplib.error_reply:
@@ -118,5 +126,3 @@ def find_open_port(host):
 #find_open_port(host)
 #connect(host,port,message)
 '''
-
-#note for users most of the code must be comentated before running the crawler.only the spider class must be uncomented
