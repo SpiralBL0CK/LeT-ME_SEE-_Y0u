@@ -6,23 +6,26 @@ import scrapy
 import pydoc
 import geocoder
 import ftplib
+from scrapy.spiders import Spider
 #import smtplib dunno mayber some smtp brute-force in the future will be added
 
-class MySpider(scrapy.Spider):
+class MySpider(Spider):
     """Crawler Class
     """
     
     name = "LetMESEEYOu"
     def __init__(self,host='', *args,**kwargs):
         super(MySpider,self).__init__(*args,**kwargs)
-        self.host = host
-        allowed_host = [self.host]
-        start_url = [self.host]
+       # self.host = host
+        self.start_urls = [host]
         
-    def request(self,host,param):
-	#saw the mistake,just need to implement the solution it its simple 
-        yield scrapy.Request(self.host.append(self.param))
-        
+    def parse(self, response):
+        for title in response.css('h2.entry-title'):
+            yield {'title': title.css('a ::text').extract_first()}
+
+        for next_page in response.css('div.prev-post > a'):
+            yield response.follow(next_page, self.parse)
+'''
 def scan(host,argz):
     """This will be the callback of implementation of scapy functionalities
         
@@ -48,7 +51,7 @@ parser.add_option("--ip",type="string",action="store",dest="ip",help=" ip dns lo
 parser.add_option("--argz",type="string",action="store",dest="argz",help="criteria of how you want to scrap the data from the given website")
 parser.add_option("--c","--chat",action="store_true",dest="connection",help="if you want to chat")
 #parser.add_option("--s","--scrap",type="callback",callack=scan(host,argz))
-parser.app_option("--b","--brute-force",action="store_true",dest="brute_force")
+
 (options,args) = parser.parse_args()
 host = options.host
 port = options.port
@@ -56,17 +59,7 @@ message = options.message
 ip = options.ip
 chat = options.connection
 argz = options.argz
-brute_force = options.brute_force
 
-def brute(host):
-#mainly done has to be bounded with the option	
-#has to be incorporated intro a try/accept
-    ftp = ftplib.FTP(host)
-    with open("list.txt","r") as f:
-        data = [x.strip().split(' ') for x in f.readlines()]
-        
-    for username,password in data:
-        ftp.login(username,password)
 
 def connect(tghost,tgport,payload_msg):
 	fd = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -106,3 +99,7 @@ def find_open_port(host):
 #pydoc.doc(find_open_port)
 #find_open_port(host)
 #connect(host,port,message)
+'''
+#note for users to be able to run the spider the rest of code besided the crawler must be commented
+
+
