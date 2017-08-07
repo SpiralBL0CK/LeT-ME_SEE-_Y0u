@@ -61,12 +61,23 @@ chat = options.connection
 argz = options.argz
 
 
+
+
 def connect(tghost,tgport,payload_msg):
 	fd = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 	try:
 		fd.connect((tghost,tgport))
-		fd.send(payload_msg)
+		b = fd.send(payload_msg)
 		print "connected to port{}".format(port)
+        if "220 hostname FTP server (Version wu-2.4.2-academ[BETA-18](1) Mon Jan 15 15:02:27 JST 1999) ready" in b:
+            print "found voulnerable ftp"
+        elif "220 hostname FTP server (Version wu-2.5.0(1) Tue Jun 15 12:43:57 MST 1999) ready" in b:
+            print "found voulnerable ftp"
+        elif 220 ProFTPD 1.2.4 Server (hostname) [hostname] in b:
+            print "found voulnerable ftp"
+        else:
+            print "we couldn't find anything souspicious about the server"
+
 		fd.close()
 
 	except socket.error:
@@ -100,6 +111,3 @@ def find_open_port(host):
 #find_open_port(host)
 #connect(host,port,message)
 '''
-#note for users to be able to run the spider the rest of code besided the crawler must be commented
-
-
