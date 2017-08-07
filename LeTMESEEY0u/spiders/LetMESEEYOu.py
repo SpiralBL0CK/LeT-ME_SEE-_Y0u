@@ -6,11 +6,11 @@ import scrapy
 import pydoc
 import geocoder
 import ftplib
-from scrapy.spiders import Spider
+from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 #import smtplib dunno mayber some smtp brute-force in the future will be added
 
-class MySpider(CrawlSpider):
+class MySpider(CrawlSpider,scrapy.Spider):
     """Crawler Class
     """
     
@@ -26,8 +26,14 @@ class MySpider(CrawlSpider):
         rules = (Rule(LinkExtractor(allow=(allowd),deny=(restrict))))
         
     def parse(self, response):
-        self.logger.info('A response from %s just arrived!', response.url)
-        print 'cookie from login', response.headers.getlist('Set-Cookie')[0].split(";")[0].split("=")[1]
+        #self.logger.info('A response from %s just arrived!', response.url)
+        print 'cookie from login', response.headers.getlist('Set-Cookie')#[0].split(";")[0].split("=")[1]
+        print ' 1 server from header', response.headers.getlist('server')
+        print ' 1 host from header', response.headers.getlist('host')
+        print ' 1 Authorization_credintial from header', response.headers.getlist('Authorization')
+        print ' 1 Proxy from header', response.headers.getlist('Proxy-Authorization')
+       # print ' 1 cookie from login', response.headers.getlist('User-Agent')
+        #print ' 1 cookie from login', response.headers.getlist('Location')	
 
 
 '''
