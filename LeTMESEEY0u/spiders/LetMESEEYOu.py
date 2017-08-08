@@ -6,10 +6,14 @@ import scrapy
 import pydoc
 import geocoder
 import ftplib
+import httplib
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
-#import smtplib dunno mayber some smtp brute-force in the future will be added
 
+
+
+#import smtplib dunno mayber some smtp brute-force in the future will be added
+'''
 class MySpider(CrawlSpider,scrapy.Spider):
     """Crawler Class
     """
@@ -19,21 +23,27 @@ class MySpider(CrawlSpider,scrapy.Spider):
         super(MySpider,self).__init__(*args,**kwargs)
         self.host = host
         self.restrict = restrict
-        self.allow = allowd
-        self.allowed_host = host.split("www.")[1]
+        self.allowd = allowd
+        print type(allowd)
+        #self.allowed_host = host.split("www.")[1]
         self.start_urls = [host]
-        
-        rules = (Rule(LinkExtractor(allow=(allowd),deny=(restrict))))
+        rules = Rule(LinkExtractor(allow=(allowd),deny=(restrict)))
         
     def parse(self, response):
-        #self.logger.info('A response from %s just arrived!', response.url)
+          for title in response.css('h2.entry-title'):
+            yield {'title': title.css('a ::text').extract_first()}
+
+        for next_page in response.css('div.prev-post > a'):
+            yield response.follow(next_page, self.parse)
+            
+        self.logger.info('A response from %s just arrived!', response.url)
         print 'cookie from login', response.headers.getlist('Set-Cookie')#[0].split(";")[0].split("=")[1]
-        print ' 1 server from header', response.headers.getlist('server')
-        print ' 1 host from header', response.headers.getlist('host')
-        print ' 1 Authorization_credintial from header', response.headers.getlist('Authorization')
-        print ' 1 Proxy from header', response.headers.getlist('Proxy-Authorization')
-       # print ' 1 cookie from login', response.headers.getlist('User-Agent')
-        #print ' 1 cookie from login', response.headers.getlist('Location')	
+        print '1 server from header', response.headers.getlist('server')
+        print '1 host from header', response.headers.getlist('host')
+        print '1 Authorization_credintial from header', response.headers.getlist('Authorization')
+        print '1 Proxy from header', response.headers.getlist('Proxy-Authorization')
+        print '1 cookie from login', response.headers.getlist('User-Agent')
+        print '1 cookie from login', response.headers.getlist('Location')	
 
 
 '''
@@ -131,4 +141,3 @@ def find_open_port(host):
 #pydoc.doc(find_open_port)
 #find_open_port(host)
 #connect(host,port,message)
-'''
