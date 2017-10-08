@@ -36,6 +36,27 @@ chat = options.connection
 argz = options.argz
 brute = options.brute
 
+def smap():
+    import smtplib
+    import time
+
+    # SMTP_SSL Example
+    FROM = "you@gmail.com"
+    TO = "to_person@yahoo.ro"
+    msg = "hello"
+    gmail_user = "user__email@gmail.com"
+    gmail_pwd = "your_password"
+    for i in range(0,10):
+        server_ssl = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+        server_ssl.ehlo()  # optional, called by login()
+        server_ssl.login(gmail_user, gmail_pwd)
+        # ssl server doesn't support or need tls, so don't call server_ssl.starttls()
+        server_ssl.sendmail(FROM, TO, msg)
+        # server_ssl.quit()
+        server_ssl.close()
+        print('successfully sent the mail')
+    time.sleep(2)
+
 def bruteforce(host):
     try:
         ftp = FTP(host)
