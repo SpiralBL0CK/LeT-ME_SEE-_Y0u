@@ -52,9 +52,9 @@ def spam_sms():
     client = Client(account_sid,auth_tokem)
 
     client.message.create(
-        to="+40316302229",
-        from_="+40722565515",
-        body="salut mama"
+        to="+your message",
+        from_="+ to person",
+        body="message"
     )
 
 
