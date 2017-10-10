@@ -1,5 +1,5 @@
 # LeT-ME_SEE-_Y0u
-basic skeleton for a python port scanner and a webcrawler included.
+basic skeleton for a python port scanner and a webcrawler included.Also a fb spammer and a gmail spammer
 
 # Usage: LeT-ME_SEE-_Y0u.py [options]
 Options:
@@ -23,6 +23,14 @@ nmap:sudo apt-get install nmap
 
 geocoder: sudo apt-get install geocoder
 
-python-nmap : sudo pip install python-nmap
+python-nmap : sudo pip3 install python-nmap
+
+fbchat: sudo pip3 install fbchat
+
+stegano: sudo pip3 install stegano
+
+urllib3: sudo pip3 install urllib
+
+bs4: sudo pip3 install bs4
 
 
