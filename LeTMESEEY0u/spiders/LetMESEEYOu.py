@@ -1,17 +1,19 @@
 #!/usr/bin/env python
-import optparse
-import socket
-import nmap
-import pydoc
-import geocoder
-import ftplib
-import re
-import random
 import datetime
-from urllib.request import urlopen
-from urllib.error import HTTPError
-from bs4 import BeautifulSoup
+import ftplib
+import optparse
+import random
+import re
+import socket
 
+import geocoder
+import nmap
+import fbchat
+from bs4 import BeautifulSoup
+from fbchat import *
+from stegano import lsb
+from urllib.error import HTTPError
+from urllib.request import urlopen
 
 nm = nmap.PortScanner()
 parser = optparse.OptionParser()
@@ -36,26 +38,46 @@ chat = options.connection
 argz = options.argz
 brute = options.brute
 
+def hime():
+    secret = lsb.hide("img to be hidden", "Hello World")
+    secret.save("name of image to be saved ")
+    clear_message = lsb.reveal("img to be revealed")
+    print(clear_message)
+
+def fmap():
+    client = Client("youremail@gmail.com","your_password")
+    if not client.isLoggedIn():
+        client.login()
+    user =  client.searchForUsers('person that u are interested')
+    user = user[0]
+    print("User's ID: {}".format(user.uid))
+    print("User's name: {}".format(user.name))
+    print("User's profile picture url: {}".format(user.photo))
+    print("User's main url: {}".format(user.url))
+    session_cookies = client.getSession()
+    client.setSession(session_cookies)
+    for i in range(0,100):
+        client.sendMessage('message to be send',thread_id="user/group id",thread_type=fbchat.ThreadType.USER)
 def smap():
     import smtplib
     import time
 
     # SMTP_SSL Example
-    FROM = "you@gmail.com"
-    TO = "to_person@yahoo.ro"
+    FROM = "your_main9@gmail.com"
+    TO = "to_person@gmail.com"
     msg = "hello"
-    gmail_user = "user__email@gmail.com"
+    gmail_user = "your_mail@gmail.com"
     gmail_pwd = "your_password"
-    for i in range(0,10):
+    for i in range(0,30):
         server_ssl = smtplib.SMTP_SSL("smtp.gmail.com", 465)
         server_ssl.ehlo()  # optional, called by login()
         server_ssl.login(gmail_user, gmail_pwd)
         # ssl server doesn't support or need tls, so don't call server_ssl.starttls()
         server_ssl.sendmail(FROM, TO, msg)
         # server_ssl.quit()
-        server_ssl.close()
         print('successfully sent the mail')
-    time.sleep(2)
+    server_ssl.close()
+    time.sleep(0)
 
 def bruteforce(host):
     try:
@@ -67,9 +89,6 @@ def bruteforce(host):
             ftp.login(username, password)
     except ftplib.error_reply:
         print ("error")
-
-
-
 
 pages = set()
 random.seed(datetime.datetime.now)
@@ -109,6 +128,23 @@ def followExternalOnly(startSite):
     print("Random external link is: " + externalLink)
     followExternalOnly(externalLink)
 
+#collect internal and external links
+allExtLinks = set()
+allIntLinks = set()
+def getAllExternalLinks(url):
+    html = urlopen(url)
+    bsObj = BeautifulSoup(html.read(),'lxml')
+    internalLinks = getInternalLinks(bsObj,splitAddress(url)[0])
+    externalLinks = getExternalLinks(bsObj,splitAddress(url)[0])
+    for link in externalLinks:
+        if link not in allExtLinks:
+            allExtLinks.add(link)
+            print(link)
+    for link in internalLinks:
+        if link not in allIntLinks:
+            print("About to get link: " + link)
+            allIntLinks.add(link)
+            getAllExternalLinks(link)
 
 def crawlDoc(url):
     """
@@ -240,6 +276,7 @@ def find_open_port(host):
     print(g.latlng)
 
 
+
 def main():
     # pydoc.doc(find_open_port)
     # find_open_port(host)
@@ -254,7 +291,12 @@ def main():
     #links = getALink('/tutorial')
     #grabLinks("/tutorial")
     #crawlDoc("")
-    #followExternalOnly("https://www.google.com/gmail")
+    #followExternalOnly("https://www.vine.com")
+    #getAllExternalLinks("https://www.twitter.com")
+    #smap()
+    #hime()
+    fmap()
+
 
 if __name__ == '__main__':
     main()
