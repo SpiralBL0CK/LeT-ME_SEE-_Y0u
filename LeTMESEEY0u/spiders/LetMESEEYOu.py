@@ -9,6 +9,7 @@ import socket
 import geocoder
 import nmap
 import fbchat
+from twilio.rest import Client
 from bs4 import BeautifulSoup
 from fbchat import *
 from stegano import lsb
@@ -38,17 +39,36 @@ chat = options.connection
 argz = options.argz
 brute = options.brute
 
+def attack():
+        s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+        s.connect(("www.google.com",80))
+        s.sendall(b"GET /"+b"payload"+b" HTTP/1.1")
+        s.sendall(b"Host /"+b"www.google.ro"+ b"\r\n\r\n")
+        s.close()
+
+def spam_sms():
+    account_sid = "ACfbc79042e06ec3d8fd62f5486cdf8029"
+    auth_tokem = "85de27d0caaa1e0e1b445e684ba28dfa"
+    client = Client(account_sid,auth_tokem)
+
+    client.message.create(
+        to="+40316302229",
+        from_="+40722565515",
+        body="salut mama"
+    )
+
+
 def hime():
-    secret = lsb.hide("img to be hidden", "Hello World")
-    secret.save("name of image to be saved ")
-    clear_message = lsb.reveal("img to be revealed")
+    secret = lsb.hide("/tmp/steganography.png", "Hello World")
+    secret.save("/tmp/Lenna-secret.png")
+    clear_message = lsb.reveal("/tmp/Lenna-secret.png")
     print(clear_message)
 
 def fmap():
-    client = Client("youremail@gmail.com","your_password")
+    client = Client("vladvatafu9@gmail.com","Labuta123")
     if not client.isLoggedIn():
         client.login()
-    user =  client.searchForUsers('person that u are interested')
+    user =  client.searchForUsers('Arian Atapour')
     user = user[0]
     print("User's ID: {}".format(user.uid))
     print("User's name: {}".format(user.name))
@@ -57,24 +77,27 @@ def fmap():
     session_cookies = client.getSession()
     client.setSession(session_cookies)
     for i in range(0,100):
-        client.sendMessage('message to be send',thread_id="user/group id",thread_type=fbchat.ThreadType.USER)
+        client.sendMessage('TE SPAMEZ TAPA merge spammeru facut de mine',thread_id="100001399768242",thread_type=fbchat.ThreadType.USER)
 def smap():
     import smtplib
     import time
 
-    FROM = "your_main9@gmail.com"
-    TO = "to_person@gmail.com"
+    # SMTP_SSL Example
+    FROM = "vladvatafu9@gmail.com"
+    TO = "vladcisco0@gmail.com"
     msg = "hello"
-    gmail_user = "your_mail@gmail.com"
-    gmail_pwd = "your_password"
+    gmail_user = "vladvatafu9@gmail.com"
+    gmail_pwd = "Labuta123"
     for i in range(0,30):
         server_ssl = smtplib.SMTP_SSL("smtp.gmail.com", 465)
         server_ssl.ehlo()  # optional, called by login()
         server_ssl.login(gmail_user, gmail_pwd)
+        # ssl server doesn't support or need tls, so don't call server_ssl.starttls()
         server_ssl.sendmail(FROM, TO, msg)
         # server_ssl.quit()
         print('successfully sent the mail')
     server_ssl.close()
+
 
 def bruteforce(host):
     try:
@@ -292,7 +315,10 @@ def main():
     #getAllExternalLinks("https://www.twitter.com")
     #smap()
     #hime()
-    fmap()
+    #fmap()
+    #spam_sms()
+    #for i in range(0,100):
+     #   attack()
 
 
 if __name__ == '__main__':
