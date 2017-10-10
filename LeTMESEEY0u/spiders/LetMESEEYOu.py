@@ -47,8 +47,8 @@ def attack():
         s.close()
 
 def spam_sms():
-    account_sid = "ACfbc79042e06ec3d8fd62f5486cdf8029"
-    auth_tokem = "85de27d0caaa1e0e1b445e684ba28dfa"
+    account_sid = ""
+    auth_tokem = ""
     client = Client(account_sid,auth_tokem)
 
     client.message.create(
