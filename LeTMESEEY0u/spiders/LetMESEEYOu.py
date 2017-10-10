@@ -65,7 +65,7 @@ def hime():
     print(clear_message)
 
 def fmap():
-    client = Client("vladvatafu9@gmail.com","Labuta123")
+    client = Client("@gmail.com","")
     if not client.isLoggedIn():
         client.login()
     user =  client.searchForUsers('Arian Atapour')
@@ -77,17 +77,17 @@ def fmap():
     session_cookies = client.getSession()
     client.setSession(session_cookies)
     for i in range(0,100):
-        client.sendMessage('TE SPAMEZ TAPA merge spammeru facut de mine',thread_id="100001399768242",thread_type=fbchat.ThreadType.USER)
+        client.sendMessage('TE SPAMEZ TAPA merge spammeru facut de mine',thread_id="",thread_type=fbchat.ThreadType.USER)
 def smap():
     import smtplib
     import time
 
     # SMTP_SSL Example
-    FROM = "vladvatafu9@gmail.com"
-    TO = "vladcisco0@gmail.com"
+    FROM = "@gmail.com"
+    TO = "@gmail.com"
     msg = "hello"
-    gmail_user = "vladvatafu9@gmail.com"
-    gmail_pwd = "Labuta123"
+    gmail_user = "@gmail.com"
+    gmail_pwd = ""
     for i in range(0,30):
         server_ssl = smtplib.SMTP_SSL("smtp.gmail.com", 465)
         server_ssl.ehlo()  # optional, called by login()
