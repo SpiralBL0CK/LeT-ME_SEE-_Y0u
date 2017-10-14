@@ -1,5 +1,5 @@
 # LeT-ME_SEE-_Y0u
-basic skeleton for a python port scanner and a webcrawler included.Also a fb spammer and a gmail spammer
+basic skeleton for a python port scanner and a webcrawler included.Also a fb spammer and a gmail spammer,also dos included
 
 # Usage: LeT-ME_SEE-_Y0u.py [options]
 Options:
@@ -34,4 +34,4 @@ urllib3: sudo pip3 install urllib
 bs4: sudo pip3 install bs4
 
 
-!F1nal VersIon Here.
+GUI will be added soon I't trying to learn html5 to make it with flask
